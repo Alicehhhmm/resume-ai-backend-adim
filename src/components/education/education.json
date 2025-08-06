@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_education_educations",
+  "info": {
+    "displayName": "education",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "universityName": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "degree": {
+      "type": "string"
+    },
+    "major": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}
