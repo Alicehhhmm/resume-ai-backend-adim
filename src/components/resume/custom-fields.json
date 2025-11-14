@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_resume_custom_fields",
+  "info": {
+    "displayName": "basics-customFields",
+    "icon": "brush"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

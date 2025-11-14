@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_resume_contacts",
+  "info": {
+    "displayName": "basics-contacts",
+    "icon": "hashtag"
+  },
+  "options": {},
+  "attributes": {
+    "github": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

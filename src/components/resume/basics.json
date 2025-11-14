@@ -1,0 +1,48 @@
+{
+  "collectionName": "components_resume_basics",
+  "info": {
+    "displayName": "basics",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "address": {
+      "type": "string"
+    },
+    "jobTitle": {
+      "type": "string"
+    },
+    "avatarUrl": {
+      "type": "string"
+    },
+    "dob": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "contacts": {
+      "type": "component",
+      "component": "resume.contacts",
+      "repeatable": false
+    },
+    "customFields": {
+      "type": "component",
+      "component": "resume.custom-fields",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

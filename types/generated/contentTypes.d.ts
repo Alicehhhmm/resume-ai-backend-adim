@@ -373,45 +373,56 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiUserResumeUserResume extends Struct.CollectionTypeSchema {
-  collectionName: 'user_resumes';
+export interface ApiResumeResume extends Struct.CollectionTypeSchema {
+  collectionName: 'resumes';
   info: {
-    displayName: 'user-resume';
-    pluralName: 'user-resumes';
-    singularName: 'user-resume';
+    displayName: 'resume';
+    pluralName: 'resumes';
+    singularName: 'resume';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    address: Schema.Attribute.String;
+    basics: Schema.Attribute.Component<'resume.basics', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    education: Schema.Attribute.Component<'education.education', true>;
-    email: Schema.Attribute.String;
-    experience: Schema.Attribute.Component<'experience.experience', true>;
-    firstName: Schema.Attribute.String;
-    jobTitle: Schema.Attribute.String;
-    lastName: Schema.Attribute.String;
-    linkedin: Schema.Attribute.String;
+    editormeta: Schema.Attribute.JSON;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::user-resume.user-resume'
+      'api::resume.resume'
     > &
       Schema.Attribute.Private;
-    phone: Schema.Attribute.String;
-    profile: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
-    resumeId: Schema.Attribute.String;
-    skills: Schema.Attribute.Component<'skills.skills', true>;
+    sections: Schema.Attribute.DynamicZone<
+      [
+        'dynamic-zone.section-summary',
+        'dynamic-zone.section-education',
+        'dynamic-zone.section-experience',
+        'dynamic-zone.section-projects',
+        'dynamic-zone.section-certifications',
+        'dynamic-zone.section-awards',
+        'dynamic-zone.section-skills',
+        'dynamic-zone.section-languages',
+        'dynamic-zone.section-publications',
+        'dynamic-zone.section-interests',
+        'dynamic-zone.section-volunteer',
+        'dynamic-zone.section-internships',
+        'dynamic-zone.section-portfolio',
+        'dynamic-zone.section-references',
+        'dynamic-zone.section-custom',
+      ]
+    >;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     userEmail: Schema.Attribute.Email;
-    userName: Schema.Attribute.String;
+    userId: Schema.Attribute.String;
+    visibility: Schema.Attribute.Enumeration<['public', 'private']>;
   };
 }
 
@@ -924,7 +935,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::user-resume.user-resume': ApiUserResumeUserResume;
+      'api::resume.resume': ApiResumeResume;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_dynamic_zone_section_summaries",
+  "info": {
+    "displayName": "section-summary"
+  },
+  "options": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "summary"
+    },
+    "name": {
+      "type": "string",
+      "default": "Professional_Summary"
+    },
+    "defaultLayout": {
+      "type": "enumeration",
+      "default": "main",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "content": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}
