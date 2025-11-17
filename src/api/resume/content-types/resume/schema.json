@@ -1,0 +1,62 @@
+{
+    "kind": "collectionType",
+    "collectionName": "resumes",
+    "info": {
+        "singularName": "resume",
+        "pluralName": "resumes",
+        "displayName": "resume"
+    },
+    "options": {
+        "draftAndPublish": false,
+        "privateAttributes": ["id", "createdBy", "updatedBy", "publishedAt"]
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "userId": {
+            "type": "string"
+        },
+        "userEmail": {
+            "type": "email"
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "title"
+        },
+        "visibility": {
+            "type": "enumeration",
+            "enum": ["public", "private"]
+        },
+        "basics": {
+            "type": "component",
+            "component": "resume.basics",
+            "repeatable": false
+        },
+        "sections": {
+            "type": "dynamiczone",
+            "components": [
+                "dynamic-zone.section-summary",
+                "dynamic-zone.section-education",
+                "dynamic-zone.section-experience",
+                "dynamic-zone.section-projects",
+                "dynamic-zone.section-certifications",
+                "dynamic-zone.section-awards",
+                "dynamic-zone.section-skills",
+                "dynamic-zone.section-languages",
+                "dynamic-zone.section-publications",
+                "dynamic-zone.section-interests",
+                "dynamic-zone.section-volunteer",
+                "dynamic-zone.section-internships",
+                "dynamic-zone.section-portfolio",
+                "dynamic-zone.section-references",
+                "dynamic-zone.section-custom"
+            ]
+        },
+        "editormeta": {
+            "type": "json"
+        }
+    }
+}
