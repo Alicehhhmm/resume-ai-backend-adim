@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_resume_education_items",
+  "info": {
+    "displayName": "education-items"
+  },
+  "options": {},
+  "attributes": {
+    "universityName": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "string"
+    },
+    "degree": {
+      "type": "string"
+    },
+    "major": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

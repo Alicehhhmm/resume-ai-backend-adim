@@ -12,6 +12,26 @@
     "name": {
       "type": "string",
       "default": "Education"
+    },
+    "defaultLayout": {
+      "type": "enumeration",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.education-items",
+      "repeatable": true
     }
   },
   "config": {}
