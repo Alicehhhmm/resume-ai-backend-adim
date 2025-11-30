@@ -10,12 +10,13 @@ const { basics_default_Data, section_default_Data, editormeta_default_Data } = r
  * @param {any} value - 任意值（object/array/primitive）
  * @param {(string|RegExp)[]} fields - 要过滤的字段名数组（字符串或正则）
  * @param {object} [options]
- * @param {string[]} [options.keepRootKeys] - 可选：在根对象级别保留的 key（即使在 fields 中也不删除）
+ * @param {string[]} [options.keepKeysDeep] - 可选：在递归子对象级别保留的 key（即使在 fields 中也不删除）
+ * @param {Object} [options.keepNestedKeys] - 可选：保留指定对象的，某个字段（即使在 fields 中也不删除）
  * @returns {any} - 过滤后新对象（原始值不变）
  */
 function filterFieldsDeep(value, fields = [], options = {}) {
     if (!value) return value
-    const { keepRootKeys = [] } = options
+    const { keepKeysDeep = [], keepNestedKeys = {} } = options
 
     // 规范化 matcher
     const matchers = (fields || []).map(f => {
@@ -31,7 +32,7 @@ function filterFieldsDeep(value, fields = [], options = {}) {
 
     const seen = new WeakMap()
 
-    function _cloneAndFilter(val, depth = 0) {
+    function _cloneAndFilter(val, depth = 0, parentKey = null) {
         // primitives / functions / null
         if (val === null || typeof val !== 'object') return val
 
@@ -48,7 +49,7 @@ function filterFieldsDeep(value, fields = [], options = {}) {
             const arrClone = []
             seen.set(val, arrClone)
             for (let i = 0; i < val.length; i++) {
-                arrClone[i] = _cloneAndFilter(val[i], depth + 1)
+                arrClone[i] = _cloneAndFilter(val[i], depth + 1, parentKey)
             }
             return arrClone
         }
@@ -57,18 +58,25 @@ function filterFieldsDeep(value, fields = [], options = {}) {
         // For non-plain objects (Map, Set, class instances), we try to shallow-copy their enumerable props.
         const objClone = {}
         seen.set(val, objClone)
+        const parentWhitelist = keepNestedKeys[parentKey] || null
 
         for (const key of Object.keys(val)) {
-            // if at root (depth===0) and key is in keepRootKeys -> always keep
-            if (depth === 0 && keepRootKeys.includes(key)) {
-                objClone[key] = _cloneAndFilter(val[key], depth + 1)
+            // if key is in keepKeysDeep -> always keep
+            if (keepKeysDeep.includes(key)) {
+                objClone[key] = _cloneAndFilter(val[key], depth + 1, key)
+                continue
+            }
+
+            // if key is in keepNestedKeys -> nest keep
+            if (parentWhitelist?.includes(key)) {
+                objClone[key] = _cloneAndFilter(val[key], depth + 1, key)
                 continue
             }
 
             // if matches filter -> skip
             if (keyMatches(key)) continue
 
-            objClone[key] = _cloneAndFilter(val[key], depth + 1)
+            objClone[key] = _cloneAndFilter(val[key], depth + 1, key)
         }
 
         return objClone
@@ -134,7 +142,7 @@ function updateNormalizeInput(payload = {}) {
         // editormeta: data.editormeta ?? JSON.parse(JSON.stringify(editormeta_default_Data)),
     }
 
-    console.log('[DEBUG📝] UpdateNormalizeInput1', result)
+    // console.log('[DEBUG📝] UpdateNormalizeInput1', result)
 
     return result
 }
@@ -197,16 +205,21 @@ module.exports = createCoreController('api::resume.resume', ({ strapi }) => ({
     async findOne(ctx) {
         const contentType = strapi.contentType('api::resume.resume')
         const strapiPrivateAttributes = contentType.options.privateAttributes || []
-        const customPrivateAttributes = ['createdAt', 'updatedAt', 'publishedAt', 'id']
+        const customPrivateAttributes = ['createdAt', 'updatedAt', 'publishedAt']
 
         // sanitize
         const sanitizedData = await this.sanitizeInput(ctx.request.body.data, ctx)
         ctx.request.body.data = sanitizedData
+        console.log('[DEBUG📝] filterFieldsDeep ctx.query', ctx.query)
 
         const response = await super.findOne(ctx)
-        const result = filterFieldsDeep(response.data, [...strapiPrivateAttributes, ...customPrivateAttributes])
+        const result = filterFieldsDeep(response.data, [...strapiPrivateAttributes, ...customPrivateAttributes], {
+            keepNestedKeys: {
+                items: ['id'],
+            },
+        })
 
-        // console.log('[DEBUG📝] filterFieldsDeep output', result)
+        // console.log('[DEBUG📝] filterFieldsDeep output', response)
 
         return {
             data: normalizeOutput(result),
@@ -225,9 +238,10 @@ module.exports = createCoreController('api::resume.resume', ({ strapi }) => ({
 
         // sanitize
         const sanitizedData = await this.sanitizeInput(ctx.request.body.data, ctx)
-        ctx.request.body.data = updateNormalizeInput(sanitizedData)
+        const filteredData = filterFieldsDeep(sanitizedData, ['id'])
+        ctx.request.body.data = updateNormalizeInput(filteredData)
 
-        // console.log('[DEBUG📝] sanitize update body.data', ctx.request.body.data)
+        console.log('[DEBUG📝] sanitize update body.data', ctx.request.body.data)
 
         const response = await super.update(ctx)
         const result = filterFieldsDeep(response.data, [...strapiPrivateAttributes, ...customPrivateAttributes])

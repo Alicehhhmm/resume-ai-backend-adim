@@ -31,6 +31,10 @@ export interface DynamicZoneSectionEducation extends Struct.ComponentSchema {
     displayName: 'section-education';
   };
   attributes: {
+    defaultLayout: Schema.Attribute.Enumeration<['main', 'sidebar']>;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isVisible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    items: Schema.Attribute.Component<'resume.education-items', true>;
     name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Education'>;
     sectionId: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'education'>;
@@ -116,6 +120,7 @@ export interface DynamicZoneSectionSummary extends Struct.ComponentSchema {
   };
   attributes: {
     content: Schema.Attribute.Blocks;
+    contentx: Schema.Attribute.Text;
     defaultLayout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
       Schema.Attribute.DefaultTo<'main'>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -178,6 +183,23 @@ export interface ResumeCustomFields extends Struct.ComponentSchema {
   };
 }
 
+export interface ResumeEducationItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_education_items';
+  info: {
+    displayName: 'education-items';
+  };
+  attributes: {
+    degree: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    endDate: Schema.Attribute.String;
+    major: Schema.Attribute.String;
+    startDate: Schema.Attribute.String;
+    universityName: Schema.Attribute.String;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -213,6 +235,7 @@ declare module '@strapi/strapi' {
       'resume.basics': ResumeBasics;
       'resume.contacts': ResumeContacts;
       'resume.custom-fields': ResumeCustomFields;
+      'resume.education-items': ResumeEducationItems;
       'shared.link': SharedLink;
     }
   }
