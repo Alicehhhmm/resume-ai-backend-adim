@@ -22,6 +22,14 @@
     },
     "summary": {
       "type": "text"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}
