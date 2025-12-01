@@ -13,7 +13,7 @@
       "type": "string",
       "default": "Professional_Summary"
     },
-    "defaultLayout": {
+    "layout": {
       "type": "enumeration",
       "default": "main",
       "enum": [
@@ -21,7 +21,7 @@
         "sidebar"
       ]
     },
-    "isVisible": {
+    "visible": {
       "type": "boolean",
       "default": true
     },

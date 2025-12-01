@@ -31,13 +31,14 @@ export interface DynamicZoneSectionEducation extends Struct.ComponentSchema {
     displayName: 'section-education';
   };
   attributes: {
-    defaultLayout: Schema.Attribute.Enumeration<['main', 'sidebar']>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    isVisible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     items: Schema.Attribute.Component<'resume.education-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
     name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Education'>;
     sectionId: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'education'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -46,7 +47,16 @@ export interface DynamicZoneSectionExperience extends Struct.ComponentSchema {
   info: {
     displayName: 'section-experience';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.experience-items', false>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Experience'>;
+    sectionId: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'experience'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionInterests extends Struct.ComponentSchema {
@@ -121,13 +131,13 @@ export interface DynamicZoneSectionSummary extends Struct.ComponentSchema {
   attributes: {
     content: Schema.Attribute.Blocks;
     contentx: Schema.Attribute.Text;
-    defaultLayout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
-      Schema.Attribute.DefaultTo<'main'>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    isVisible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
     name: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Professional_Summary'>;
     sectionId: Schema.Attribute.String & Schema.Attribute.DefaultTo<'summary'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -200,6 +210,21 @@ export interface ResumeEducationItems extends Struct.ComponentSchema {
   };
 }
 
+export interface ResumeExperienceItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_experience_items';
+  info: {
+    displayName: 'experience-items';
+  };
+  attributes: {
+    companyName: Schema.Attribute.String;
+    endDate: Schema.Attribute.String;
+    location: Schema.Attribute.String;
+    position: Schema.Attribute.String;
+    startDate: Schema.Attribute.String;
+    summary: Schema.Attribute.Text;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -236,6 +261,7 @@ declare module '@strapi/strapi' {
       'resume.contacts': ResumeContacts;
       'resume.custom-fields': ResumeCustomFields;
       'resume.education-items': ResumeEducationItems;
+      'resume.experience-items': ResumeExperienceItems;
       'shared.link': SharedLink;
     }
   }

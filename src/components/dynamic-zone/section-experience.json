@@ -4,6 +4,36 @@
     "displayName": "section-experience"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "experience"
+    },
+    "name": {
+      "type": "string",
+      "default": "Experience"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "main",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.experience-items",
+      "repeatable": false
+    }
+  },
   "config": {}
 }

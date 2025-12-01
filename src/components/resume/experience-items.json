@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_resume_experience_items",
+  "info": {
+    "displayName": "experience-items"
+  },
+  "options": {},
+  "attributes": {
+    "companyName": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

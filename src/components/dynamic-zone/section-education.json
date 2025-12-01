@@ -13,14 +13,15 @@
       "type": "string",
       "default": "Education"
     },
-    "defaultLayout": {
+    "layout": {
       "type": "enumeration",
+      "default": "main",
       "enum": [
         "main",
         "sidebar"
       ]
     },
-    "isVisible": {
+    "visible": {
       "type": "boolean",
       "default": true
     },
