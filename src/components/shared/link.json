@@ -5,10 +5,10 @@
   },
   "options": {},
   "attributes": {
-    "text": {
+    "label": {
       "type": "string"
     },
-    "url": {
+    "href": {
       "type": "string"
     },
     "target": {

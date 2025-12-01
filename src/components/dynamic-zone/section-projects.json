@@ -4,6 +4,35 @@
     "displayName": "section-projects"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "projects"
+    },
+    "name": {
+      "type": "string",
+      "default": "Projects"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "main",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean"
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.projects-items",
+      "repeatable": false
+    }
+  },
   "config": {}
 }

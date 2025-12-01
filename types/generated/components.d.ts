@@ -96,7 +96,15 @@ export interface DynamicZoneSectionProjects extends Struct.ComponentSchema {
   info: {
     displayName: 'section-projects';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean;
+    items: Schema.Attribute.Component<'resume.projects-items', false>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Projects'>;
+    sectionId: Schema.Attribute.String & Schema.Attribute.DefaultTo<'projects'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionPublications extends Struct.ComponentSchema {
@@ -217,11 +225,30 @@ export interface ResumeExperienceItems extends Struct.ComponentSchema {
   };
   attributes: {
     companyName: Schema.Attribute.String;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     endDate: Schema.Attribute.String;
     location: Schema.Attribute.String;
     position: Schema.Attribute.String;
     startDate: Schema.Attribute.String;
     summary: Schema.Attribute.Text;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface ResumeProjectsItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_projects_items';
+  info: {
+    displayName: 'projects-items';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    endDate: Schema.Attribute.String;
+    position: Schema.Attribute.String;
+    projectName: Schema.Attribute.String;
+    startDate: Schema.Attribute.String;
+    summary: Schema.Attribute.Text;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -262,6 +289,7 @@ declare module '@strapi/strapi' {
       'resume.custom-fields': ResumeCustomFields;
       'resume.education-items': ResumeEducationItems;
       'resume.experience-items': ResumeExperienceItems;
+      'resume.projects-items': ResumeProjectsItems;
       'shared.link': SharedLink;
     }
   }
