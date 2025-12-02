@@ -4,6 +4,36 @@
     "displayName": "section-awards"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "awards"
+    },
+    "name": {
+      "type": "string",
+      "default": "Awards"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "sidebar",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.awards-items",
+      "repeatable": true
+    }
+  },
   "config": {}
 }

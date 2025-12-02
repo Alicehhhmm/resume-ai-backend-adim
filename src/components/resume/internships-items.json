@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_resume_internships_items",
+  "info": {
+    "displayName": "internships-items"
+  },
+  "options": {},
+  "attributes": {
+    "companyname": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

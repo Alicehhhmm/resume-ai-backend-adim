@@ -439,7 +439,6 @@ export interface ApiResumeResume extends Struct.CollectionTypeSchema {
   };
   options: {
     draftAndPublish: false;
-    privateAttributes: ['id', 'createdBy', 'updatedBy', 'publishedAt'];
   };
   attributes: {
     basics: Schema.Attribute.Component<'resume.basics', false>;
@@ -463,13 +462,10 @@ export interface ApiResumeResume extends Struct.CollectionTypeSchema {
         'dynamic-zone.section-certifications',
         'dynamic-zone.section-awards',
         'dynamic-zone.section-skills',
-        'dynamic-zone.section-languages',
-        'dynamic-zone.section-publications',
         'dynamic-zone.section-interests',
         'dynamic-zone.section-volunteer',
         'dynamic-zone.section-internships',
         'dynamic-zone.section-portfolio',
-        'dynamic-zone.section-references',
         'dynamic-zone.section-custom',
       ]
     >;

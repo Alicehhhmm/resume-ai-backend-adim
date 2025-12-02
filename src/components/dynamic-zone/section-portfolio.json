@@ -4,6 +4,36 @@
     "displayName": "section-portfolio"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "portfolio"
+    },
+    "name": {
+      "type": "string",
+      "default": "Portfolio"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "main",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.portfolio-items",
+      "repeatable": true
+    }
+  },
   "config": {}
 }

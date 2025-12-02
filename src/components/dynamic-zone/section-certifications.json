@@ -4,6 +4,36 @@
     "displayName": "section-certifications"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "certifications"
+    },
+    "name": {
+      "type": "string",
+      "default": "Certifications"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "sidebar",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.certifications-items",
+      "repeatable": true
+    }
+  },
   "config": {}
 }

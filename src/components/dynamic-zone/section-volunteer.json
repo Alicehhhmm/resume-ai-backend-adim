@@ -4,6 +4,36 @@
     "displayName": "section-volunteer"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "volunteer"
+    },
+    "name": {
+      "type": "string",
+      "default": "Volunteer"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "main",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.volunteer-items",
+      "repeatable": true
+    }
+  },
   "config": {}
 }

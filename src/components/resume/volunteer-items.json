@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_resume_volunteer_items",
+  "info": {
+    "displayName": "volunteer-items"
+  },
+  "options": {},
+  "attributes": {
+    "organization": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

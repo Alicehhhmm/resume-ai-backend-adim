@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_resume_portfolio_items",
+  "info": {
+    "displayName": "portfolio-items"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "link": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

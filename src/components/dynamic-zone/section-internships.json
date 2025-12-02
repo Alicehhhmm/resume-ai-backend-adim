@@ -4,6 +4,36 @@
     "displayName": "section-internships"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "internships"
+    },
+    "name": {
+      "type": "string",
+      "default": "Internships"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "main",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.internships-items",
+      "repeatable": true
+    }
+  },
   "config": {}
 }

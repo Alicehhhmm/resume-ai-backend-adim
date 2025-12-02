@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_resume_certifications_items",
+  "info": {
+    "displayName": "certifications-items"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "string"
+    },
+    "validDate": {
+      "type": "string"
+    },
+    "link": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

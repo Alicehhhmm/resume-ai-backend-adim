@@ -4,6 +4,36 @@
     "displayName": "section-interests"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "interests"
+    },
+    "name": {
+      "type": "string",
+      "default": "Interests"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "sidebar",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.interests-items",
+      "repeatable": true
+    }
+  },
   "config": {}
 }

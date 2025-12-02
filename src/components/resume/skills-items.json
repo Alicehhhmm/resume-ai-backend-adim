@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_resume_skills_items",
+  "info": {
+    "displayName": "skills-items"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "default": "technical",
+      "enum": [
+        "technical",
+        "learn"
+      ]
+    },
+    "level": {
+      "type": "integer",
+      "default": 1
+    },
+    "ratio": {
+      "type": "biginteger",
+      "default": "0"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

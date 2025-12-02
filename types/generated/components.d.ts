@@ -5,7 +5,15 @@ export interface DynamicZoneSectionAwards extends Struct.ComponentSchema {
   info: {
     displayName: 'section-awards';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.awards-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'sidebar'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Awards'>;
+    sectionId: Schema.Attribute.String & Schema.Attribute.DefaultTo<'awards'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionCertifications
@@ -14,7 +22,17 @@ export interface DynamicZoneSectionCertifications
   info: {
     displayName: 'section-certifications';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.certifications-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'sidebar'>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Certifications'>;
+    sectionId: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'certifications'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionCustom extends Struct.ComponentSchema {
@@ -64,7 +82,16 @@ export interface DynamicZoneSectionInterests extends Struct.ComponentSchema {
   info: {
     displayName: 'section-interests';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.interests-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'sidebar'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Interests'>;
+    sectionId: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'interests'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionInternships extends Struct.ComponentSchema {
@@ -72,7 +99,16 @@ export interface DynamicZoneSectionInternships extends Struct.ComponentSchema {
   info: {
     displayName: 'section-internships';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.internships-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Internships'>;
+    sectionId: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'internships'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionLanguages extends Struct.ComponentSchema {
@@ -88,7 +124,16 @@ export interface DynamicZoneSectionPortfolio extends Struct.ComponentSchema {
   info: {
     displayName: 'section-portfolio';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.portfolio-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Portfolio'>;
+    sectionId: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'portfolio'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionProjects extends Struct.ComponentSchema {
@@ -107,28 +152,20 @@ export interface DynamicZoneSectionProjects extends Struct.ComponentSchema {
   };
 }
 
-export interface DynamicZoneSectionPublications extends Struct.ComponentSchema {
-  collectionName: 'components_dynamic_zone_section_publications';
-  info: {
-    displayName: 'section-publications';
-  };
-  attributes: {};
-}
-
-export interface DynamicZoneSectionReferences extends Struct.ComponentSchema {
-  collectionName: 'components_dynamic_zone_section_references';
-  info: {
-    displayName: 'section-references';
-  };
-  attributes: {};
-}
-
 export interface DynamicZoneSectionSkills extends Struct.ComponentSchema {
   collectionName: 'components_dynamic_zone_section_skills';
   info: {
     displayName: 'section-skills';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.skills-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
+    name: Schema.Attribute.String;
+    sectionId: Schema.Attribute.String & Schema.Attribute.DefaultTo<'skills'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
 }
 
 export interface DynamicZoneSectionSummary extends Struct.ComponentSchema {
@@ -154,7 +191,31 @@ export interface DynamicZoneSectionVolunteer extends Struct.ComponentSchema {
   info: {
     displayName: 'section-volunteer';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.volunteer-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Volunteer'>;
+    sectionId: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'volunteer'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface ResumeAwardsItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_awards_items';
+  info: {
+    displayName: 'awards-items';
+  };
+  attributes: {
+    date: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    issuer: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface ResumeBasics extends Struct.ComponentSchema {
@@ -175,6 +236,19 @@ export interface ResumeBasics extends Struct.ComponentSchema {
     phone: Schema.Attribute.String;
     tags: Schema.Attribute.JSON;
     website: Schema.Attribute.String;
+  };
+}
+
+export interface ResumeCertificationsItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_certifications_items';
+  info: {
+    displayName: 'certifications-items';
+  };
+  attributes: {
+    issuer: Schema.Attribute.String;
+    link: Schema.Attribute.Component<'shared.link', false>;
+    title: Schema.Attribute.String;
+    validDate: Schema.Attribute.String;
   };
 }
 
@@ -235,6 +309,44 @@ export interface ResumeExperienceItems extends Struct.ComponentSchema {
   };
 }
 
+export interface ResumeInterestsItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_interests_items';
+  info: {
+    displayName: 'interests-items';
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+  };
+}
+
+export interface ResumeInternshipsItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_internships_items';
+  info: {
+    displayName: 'internships-items';
+  };
+  attributes: {
+    companyname: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    endDate: Schema.Attribute.String;
+    position: Schema.Attribute.String;
+    startDate: Schema.Attribute.String;
+  };
+}
+
+export interface ResumePortfolioItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_portfolio_items';
+  info: {
+    displayName: 'portfolio-items';
+  };
+  attributes: {
+    date: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    link: Schema.Attribute.Component<'shared.link', true>;
+    publisher: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface ResumeProjectsItems extends Struct.ComponentSchema {
   collectionName: 'components_resume_projects_items';
   info: {
@@ -244,11 +356,42 @@ export interface ResumeProjectsItems extends Struct.ComponentSchema {
     description: Schema.Attribute.Text;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     endDate: Schema.Attribute.String;
+    link: Schema.Attribute.Component<'shared.link', false>;
     position: Schema.Attribute.String;
     projectName: Schema.Attribute.String;
     startDate: Schema.Attribute.String;
     summary: Schema.Attribute.Text;
     visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface ResumeSkillsItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_skills_items';
+  info: {
+    displayName: 'skills-items';
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<['technical', 'learn']> &
+      Schema.Attribute.DefaultTo<'technical'>;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    level: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    name: Schema.Attribute.String;
+    ratio: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<'0'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface ResumeVolunteerItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_volunteer_items';
+  info: {
+    displayName: 'volunteer-items';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    endDate: Schema.Attribute.String;
+    organization: Schema.Attribute.String;
+    role: Schema.Attribute.String;
+    startDate: Schema.Attribute.String;
   };
 }
 
@@ -258,11 +401,11 @@ export interface SharedLink extends Struct.ComponentSchema {
     displayName: 'link';
   };
   attributes: {
+    href: Schema.Attribute.String;
+    label: Schema.Attribute.String;
     target: Schema.Attribute.Enumeration<
       ['_blank', '_self', '_parent', '_top']
     >;
-    text: Schema.Attribute.String;
-    url: Schema.Attribute.String;
   };
 }
 
@@ -279,17 +422,22 @@ declare module '@strapi/strapi' {
       'dynamic-zone.section-languages': DynamicZoneSectionLanguages;
       'dynamic-zone.section-portfolio': DynamicZoneSectionPortfolio;
       'dynamic-zone.section-projects': DynamicZoneSectionProjects;
-      'dynamic-zone.section-publications': DynamicZoneSectionPublications;
-      'dynamic-zone.section-references': DynamicZoneSectionReferences;
       'dynamic-zone.section-skills': DynamicZoneSectionSkills;
       'dynamic-zone.section-summary': DynamicZoneSectionSummary;
       'dynamic-zone.section-volunteer': DynamicZoneSectionVolunteer;
+      'resume.awards-items': ResumeAwardsItems;
       'resume.basics': ResumeBasics;
+      'resume.certifications-items': ResumeCertificationsItems;
       'resume.contacts': ResumeContacts;
       'resume.custom-fields': ResumeCustomFields;
       'resume.education-items': ResumeEducationItems;
       'resume.experience-items': ResumeExperienceItems;
+      'resume.interests-items': ResumeInterestsItems;
+      'resume.internships-items': ResumeInternshipsItems;
+      'resume.portfolio-items': ResumePortfolioItems;
       'resume.projects-items': ResumeProjectsItems;
+      'resume.skills-items': ResumeSkillsItems;
+      'resume.volunteer-items': ResumeVolunteerItems;
       'shared.link': SharedLink;
     }
   }

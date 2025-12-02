@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_resume_interests_items",
+  "info": {
+    "displayName": "interests-items"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
