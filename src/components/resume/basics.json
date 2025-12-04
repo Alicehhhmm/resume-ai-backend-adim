@@ -30,14 +30,6 @@
     "website": {
       "type": "string"
     },
-    "tags": {
-      "type": "json"
-    },
-    "contacts": {
-      "type": "component",
-      "component": "resume.contacts",
-      "repeatable": false
-    },
     "customFields": {
       "type": "component",
       "component": "resume.custom-fields",

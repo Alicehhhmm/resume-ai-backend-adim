@@ -31,7 +31,7 @@
     "items": {
       "type": "component",
       "component": "resume.projects-items",
-      "repeatable": false
+      "repeatable": true
     }
   },
   "config": {}

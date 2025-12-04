@@ -75,7 +75,7 @@ export interface DynamicZoneSectionExperience extends Struct.ComponentSchema {
   };
   attributes: {
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    items: Schema.Attribute.Component<'resume.experience-items', false>;
+    items: Schema.Attribute.Component<'resume.experience-items', true>;
     layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
       Schema.Attribute.DefaultTo<'main'>;
     name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Experience'>;
@@ -151,7 +151,7 @@ export interface DynamicZoneSectionProjects extends Struct.ComponentSchema {
   };
   attributes: {
     disabled: Schema.Attribute.Boolean;
-    items: Schema.Attribute.Component<'resume.projects-items', false>;
+    items: Schema.Attribute.Component<'resume.projects-items', true>;
     layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
       Schema.Attribute.DefaultTo<'main'>;
     name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Projects'>;
@@ -235,14 +235,12 @@ export interface ResumeBasics extends Struct.ComponentSchema {
   attributes: {
     address: Schema.Attribute.String;
     avatarUrl: Schema.Attribute.String;
-    contacts: Schema.Attribute.Component<'resume.contacts', false>;
     customFields: Schema.Attribute.Component<'resume.custom-fields', true>;
     dob: Schema.Attribute.String;
     email: Schema.Attribute.Email;
     jobTitle: Schema.Attribute.String;
     name: Schema.Attribute.String;
     phone: Schema.Attribute.String;
-    tags: Schema.Attribute.JSON;
     website: Schema.Attribute.String;
   };
 }
@@ -257,17 +255,6 @@ export interface ResumeCertificationsItems extends Struct.ComponentSchema {
     link: Schema.Attribute.Component<'shared.link', false>;
     title: Schema.Attribute.String;
     validDate: Schema.Attribute.String;
-  };
-}
-
-export interface ResumeContacts extends Struct.ComponentSchema {
-  collectionName: 'components_resume_contacts';
-  info: {
-    displayName: 'basics-contacts';
-    icon: 'hashtag';
-  };
-  attributes: {
-    github: Schema.Attribute.String;
   };
 }
 
@@ -451,7 +438,6 @@ declare module '@strapi/strapi' {
       'resume.awards-items': ResumeAwardsItems;
       'resume.basics': ResumeBasics;
       'resume.certifications-items': ResumeCertificationsItems;
-      'resume.contacts': ResumeContacts;
       'resume.custom-fields': ResumeCustomFields;
       'resume.custom-items': ResumeCustomItems;
       'resume.education-items': ResumeEducationItems;

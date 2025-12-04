@@ -32,7 +32,7 @@
     "items": {
       "type": "component",
       "component": "resume.experience-items",
-      "repeatable": false
+      "repeatable": true
     }
   },
   "config": {}
