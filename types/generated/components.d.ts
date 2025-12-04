@@ -40,7 +40,15 @@ export interface DynamicZoneSectionCustom extends Struct.ComponentSchema {
   info: {
     displayName: 'section-custom';
   };
-  attributes: {};
+  attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'resume.custom-items', true>;
+    layout: Schema.Attribute.Enumeration<['main', 'sidebar']> &
+      Schema.Attribute.DefaultTo<'main'>;
+    name: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Custom'>;
+    sectionId: Schema.Attribute.String & Schema.Attribute.DefaultTo<'custom'>;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
 }
 
 export interface DynamicZoneSectionEducation extends Struct.ComponentSchema {
@@ -275,6 +283,21 @@ export interface ResumeCustomFields extends Struct.ComponentSchema {
   };
 }
 
+export interface ResumeCustomItems extends Struct.ComponentSchema {
+  collectionName: 'components_resume_custom_items';
+  info: {
+    displayName: 'custom-items';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    endDateStr: Schema.Attribute.String;
+    link: Schema.Attribute.Component<'shared.link', false>;
+    startDateStr: Schema.Attribute.String;
+    summary: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface ResumeEducationItems extends Struct.ComponentSchema {
   collectionName: 'components_resume_education_items';
   info: {
@@ -430,6 +453,7 @@ declare module '@strapi/strapi' {
       'resume.certifications-items': ResumeCertificationsItems;
       'resume.contacts': ResumeContacts;
       'resume.custom-fields': ResumeCustomFields;
+      'resume.custom-items': ResumeCustomItems;
       'resume.education-items': ResumeEducationItems;
       'resume.experience-items': ResumeExperienceItems;
       'resume.interests-items': ResumeInterestsItems;

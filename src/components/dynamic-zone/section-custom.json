@@ -4,6 +4,36 @@
     "displayName": "section-custom"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "sectionId": {
+      "type": "string",
+      "default": "custom"
+    },
+    "name": {
+      "type": "string",
+      "default": "Custom"
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "main",
+      "enum": [
+        "main",
+        "sidebar"
+      ]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "component": "resume.custom-items",
+      "repeatable": true
+    }
+  },
   "config": {}
 }
