@@ -18,6 +18,14 @@
       "type": "component",
       "component": "shared.link",
       "repeatable": false
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}

@@ -251,10 +251,12 @@ export interface ResumeCertificationsItems extends Struct.ComponentSchema {
     displayName: 'certifications-items';
   };
   attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     issuer: Schema.Attribute.String;
     link: Schema.Attribute.Component<'shared.link', false>;
     title: Schema.Attribute.String;
     validDate: Schema.Attribute.String;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
