@@ -7,6 +7,14 @@
   "attributes": {
     "name": {
       "type": "string"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}

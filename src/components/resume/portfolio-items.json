@@ -17,10 +17,18 @@
     "link": {
       "type": "component",
       "component": "shared.link",
-      "repeatable": true
+      "repeatable": false
     },
     "description": {
       "type": "text"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}

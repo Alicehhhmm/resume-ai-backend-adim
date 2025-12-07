@@ -8,14 +8,6 @@
     "name": {
       "type": "string"
     },
-    "category": {
-      "type": "enumeration",
-      "default": "technical",
-      "enum": [
-        "technical",
-        "learn"
-      ]
-    },
     "level": {
       "type": "integer",
       "default": 1
@@ -23,6 +15,9 @@
     "ratio": {
       "type": "biginteger",
       "default": "0"
+    },
+    "description": {
+      "type": "text"
     },
     "visible": {
       "type": "boolean",

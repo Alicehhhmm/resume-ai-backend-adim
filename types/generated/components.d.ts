@@ -327,7 +327,9 @@ export interface ResumeInterestsItems extends Struct.ComponentSchema {
     displayName: 'interests-items';
   };
   attributes: {
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     name: Schema.Attribute.String;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -337,11 +339,13 @@ export interface ResumeInternshipsItems extends Struct.ComponentSchema {
     displayName: 'internships-items';
   };
   attributes: {
-    companyname: Schema.Attribute.String;
+    companyName: Schema.Attribute.String;
     description: Schema.Attribute.Text;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     endDate: Schema.Attribute.String;
     position: Schema.Attribute.String;
     startDate: Schema.Attribute.String;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -353,9 +357,11 @@ export interface ResumePortfolioItems extends Struct.ComponentSchema {
   attributes: {
     date: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    link: Schema.Attribute.Component<'shared.link', true>;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    link: Schema.Attribute.Component<'shared.link', false>;
     publisher: Schema.Attribute.String;
     title: Schema.Attribute.String;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -383,8 +389,7 @@ export interface ResumeSkillsItems extends Struct.ComponentSchema {
     displayName: 'skills-items';
   };
   attributes: {
-    category: Schema.Attribute.Enumeration<['technical', 'learn']> &
-      Schema.Attribute.DefaultTo<'technical'>;
+    description: Schema.Attribute.Text;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     level: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     name: Schema.Attribute.String;
@@ -400,10 +405,12 @@ export interface ResumeVolunteerItems extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     endDate: Schema.Attribute.String;
     organization: Schema.Attribute.String;
     role: Schema.Attribute.String;
     startDate: Schema.Attribute.String;
+    visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 

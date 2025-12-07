@@ -5,7 +5,7 @@
   },
   "options": {},
   "attributes": {
-    "companyname": {
+    "companyName": {
       "type": "string"
     },
     "position": {
@@ -19,6 +19,14 @@
     },
     "description": {
       "type": "text"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}
