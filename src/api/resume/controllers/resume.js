@@ -134,15 +134,37 @@ function updateNormalizeInput(payload = {}) {
     if (!payload?.data) return payload
 
     const { data, ...rest } = payload
+    let normalizedSections = []
+
+    if (data.sections) {
+        normalizedSections = Object.keys(data.sections).map(key => {
+            const section = { ...data.sections[key] }
+
+            // 处理自定义 section 的组件标识（必须将 __component 放在首位）
+            if (
+                section.sectionId &&
+                typeof section.sectionId === 'string' &&
+                section.sectionId.startsWith('custom-') &&
+                !section.__component
+            ) {
+                return {
+                    __component: 'dynamic-zone.section-custom',
+                    ...section,
+                }
+            }
+
+            return section
+        })
+    }
 
     const result = {
         ...rest,
         basics: data.basics ?? {},
-        sections: objectToArray(data.sections ?? {}),
+        sections: normalizedSections,
         // editormeta: data.editormeta ?? JSON.parse(JSON.stringify(editormeta_default_Data)),
     }
 
-    // console.log('[DEBUG📝] UpdateNormalizeInput1', result)
+    // console.log('[DEBUG📝] UpdateNormalizeInput1', data.sections)
 
     return result
 }
@@ -177,7 +199,7 @@ module.exports = createCoreController('api::resume.resume', ({ strapi }) => ({
         const response = await super.create(ctx)
         const result = filterFieldsDeep(response.data, [...strapiPrivateAttributes, ...customPrivateAttributes])
 
-        console.log('[DEBUG📝] filterFieldsDeep output create', result)
+        // console.log('[DEBUG📝] filterFieldsDeep output create', result)
 
         return {
             data: normalizeOutput(result),
@@ -210,7 +232,7 @@ module.exports = createCoreController('api::resume.resume', ({ strapi }) => ({
         // sanitize
         const sanitizedData = await this.sanitizeInput(ctx.request.body.data, ctx)
         ctx.request.body.data = sanitizedData
-        console.log('[DEBUG📝] filterFieldsDeep ctx.query', ctx.query)
+        // console.log('[DEBUG📝] filterFieldsDeep ctx.query', ctx.query)
 
         const response = await super.findOne(ctx)
         const result = filterFieldsDeep(response.data, [...strapiPrivateAttributes, ...customPrivateAttributes], {
