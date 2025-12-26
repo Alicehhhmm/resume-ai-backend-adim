@@ -10,7 +10,7 @@ const basics_default_Data = {
     customFields: [],
 }
 
-const section_default_Data = [
+const REQUIRED = [
     {
         __component: 'dynamic-zone.section-summary',
         sectionId: 'summary',
@@ -66,6 +66,18 @@ const section_default_Data = [
         disabled: false,
         items: [],
     },
+]
+
+const OPTIONAL = [
+    {
+        __component: 'dynamic-zone.section-awards',
+        sectionId: 'awards',
+        name: 'Awards',
+        layout: 'sidebar',
+        visible: true,
+        disabled: false,
+        items: [],
+    },
     {
         __component: 'dynamic-zone.section-skills',
         sectionId: 'skills',
@@ -111,15 +123,27 @@ const section_default_Data = [
         disabled: false,
         items: [],
     },
+]
+
+const CUSTOM = [
     {
         __component: 'dynamic-zone.section-custom',
+        sectionId: 'custom',
+        name: 'custom',
+        layout: 'main',
+        visible: true,
+        disabled: false,
+        items: [],
     },
 ]
 
 const editormeta_default_Data = JSON.stringify({})
 
 module.exports = {
+    required_sections: REQUIRED,
+    optional_sections: OPTIONAL,
+    custom_sections: CUSTOM,
     basics_default_Data,
-    section_default_Data,
+    section_default_Data: [...REQUIRED, ...OPTIONAL, ...CUSTOM],
     editormeta_default_Data,
 }

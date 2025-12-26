@@ -2,7 +2,13 @@
 
 const { createCoreController } = require('@strapi/strapi').factories
 const deepmerge = require('deepmerge')
-const { basics_default_Data, section_default_Data, editormeta_default_Data } = require('../../../../data')
+const {
+    basics_default_Data,
+    required_sections,
+    optional_sections,
+    section_default_Data,
+    editormeta_default_Data,
+} = require('../../../../data')
 
 /**
  * 深度过滤对象/数组中的指定字段（支持字符串或正则），安全处理环引用，不修改原数据。
@@ -120,7 +126,7 @@ const createNormalizeInput = payload => {
 
     // sections：如果是对象 → 数组
     if (!payload.sections) {
-        payload.sections = deepmerge([], section_default_Data)
+        payload.sections = deepmerge([], required_sections)
     } else if (!Array.isArray(payload.sections)) {
         payload.sections = objectToArray(payload.sections)
     }
@@ -130,32 +136,35 @@ const createNormalizeInput = payload => {
     return payload
 }
 
+/**
+ * 将 sections 对象转换为数组，并添加 __component 标识
+ * @param {Object} sections - sections 对象
+ * @returns {Array} 标准化后的 sections 数组
+ */
+const SECTIONS_MAP = new Map(section_default_Data.map(section => [section.sectionId, section.__component]))
+
+function normalizeSections(sections) {
+    return Object.entries(sections).map(([key, section]) => {
+        if (section.__component) {
+            return { ...section }
+        }
+
+        const sectionId = section.sectionId
+        if (!sectionId || typeof sectionId !== 'string') {
+            return { ...section }
+        }
+
+        let component = sectionId.startsWith('custom') ? SECTIONS_MAP.get('custom') : SECTIONS_MAP.get(sectionId)
+
+        return component ? { __component: component, ...section } : { ...section }
+    })
+}
+
 function updateNormalizeInput(payload = {}) {
     if (!payload?.data) return payload
 
     const { data, ...rest } = payload
-    let normalizedSections = []
-
-    if (data.sections) {
-        normalizedSections = Object.keys(data.sections).map(key => {
-            const section = { ...data.sections[key] }
-
-            // 处理自定义 section 的组件标识（必须将 __component 放在首位）
-            if (
-                section.sectionId &&
-                typeof section.sectionId === 'string' &&
-                section.sectionId.startsWith('custom-') &&
-                !section.__component
-            ) {
-                return {
-                    __component: 'dynamic-zone.section-custom',
-                    ...section,
-                }
-            }
-
-            return section
-        })
-    }
+    const normalizedSections = data.sections ? normalizeSections(data.sections) : []
 
     const result = {
         ...rest,
@@ -263,7 +272,7 @@ module.exports = createCoreController('api::resume.resume', ({ strapi }) => ({
         const filteredData = filterFieldsDeep(sanitizedData, ['id'])
         ctx.request.body.data = updateNormalizeInput(filteredData)
 
-        console.log('[DEBUG📝] sanitize update body.data', ctx.request.body.data)
+        // console.log('[DEBUG📝] sanitize update body.data', ctx.request.body.data)
 
         const response = await super.update(ctx)
         const result = filterFieldsDeep(response.data, [...strapiPrivateAttributes, ...customPrivateAttributes])
